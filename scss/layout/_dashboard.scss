@@ -1,0 +1,271 @@
+@use '../base/variables' as *;
+@use '../base/typography' as *;
+
+.dashboard-app {
+    min-height: 100vh;
+    --chart-height: 130px;
+    --chart-sm-height: 120px;
+}
+
+.main-content {
+    width: calc(100% - #{$sidebar-w});
+    margin-left: $sidebar-w;
+    padding: 0.25rem 1.15rem 1rem;
+    transition:
+        width 0.25s ease,
+        margin-left 0.25s ease;
+}
+
+.topbar {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0.45rem 0.2rem 0.55rem;
+
+    h2 {
+        font-size: 1.25rem;
+        line-height: 100%;
+        font-weight: $font-bold;
+        color: rgba(102, 102, 102, 1);
+    }
+
+    #clockNow {
+        font-size: 1.125rem;
+        line-height: 100%;
+        font-weight: $font-bold;
+        color: rgba(18, 70, 128, 1);
+    }
+
+    #dateNow {
+        font-size: 0.875rem;
+        line-height: 100%;
+        font-weight: $font-regular;
+        color: rgba(102, 102, 102, 1);
+    }
+}
+
+.avatar-circle {
+    --avatar-size: 40px;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    border-radius: 999px;
+    object-fit: cover;
+    box-shadow: 0 4px 18px rgba(30, 41, 59, 0.1);
+}
+
+.dash-card {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-card;
+    box-shadow: $shadow-soft;
+    padding: 0.85rem 0.9rem;
+    height: 100%;
+}
+
+.card-title {
+    font-size: $font-size-base;
+    font-weight: $font-bold;
+    line-height: 1.125rem;
+}
+
+.display-number {
+    font-size: $font-size-4xl;
+    font-weight: $font-regular;
+    line-height: 1.125rem;
+}
+
+.display-number-total {
+    font-size: $font-size-xl;
+    font-weight: $font-regular;
+    line-height: 1.125rem;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.text-purple {
+    color: $color-purple;
+}
+
+.placeholder-note {
+    background: rgba(239, 243, 247, 1);
+    color: rgba(0, 0, 0, 1);
+    border-radius: 3px;
+    padding: 0.65rem 0.7rem;
+    font-size: $font-size-xs;
+}
+
+.form-select.form-select-sm {
+    color: rgba(0, 0, 0, 0.5);
+    border-color: #e6e9ef;
+    border-radius: 3px;
+    min-width: 108px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-areas:
+        'safety uniform helmet warning'
+        'access access mask warning'
+        'tracking tracking tracking weather';
+    gap: 0.75rem;
+}
+
+.grid-safety {
+    grid-area: safety;
+}
+
+.grid-uniform {
+    grid-area: uniform;
+}
+
+.grid-helmet {
+    grid-area: helmet;
+}
+
+.grid-access {
+    grid-area: access;
+}
+
+.grid-mask {
+    grid-area: mask;
+}
+
+.grid-tracking {
+    grid-area: tracking;
+}
+
+.grid-warning {
+    grid-area: warning;
+}
+
+.grid-weather {
+    grid-area: weather;
+}
+
+.access-card {
+    overflow: hidden;
+
+    .access-chart-scroll {
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin-left: 0;
+        padding-left: 0;
+        padding-bottom: 6px;
+        scrollbar-width: none;
+        scrollbar-color: transparent transparent;
+
+        &::-webkit-scrollbar {
+            height: 0;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: transparent;
+            border-radius: 999px;
+        }
+
+        &.is-scrolling {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(148, 163, 184, 0.42) transparent;
+
+            &::-webkit-scrollbar {
+                height: 6px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: linear-gradient(180deg, rgba(203, 213, 225, 0.75), rgba(148, 163, 184, 0.65));
+            }
+        }
+    }
+
+    .access-chart-track {
+        width: 100%;
+    }
+
+    .access-legend {
+        border-top: 1px solid rgba(238, 238, 238, 1);
+        padding-top: 1.45rem;
+    }
+}
+
+.access-legend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.85rem;
+    }
+
+    .legend-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+    }
+
+    .legend-label {
+        color: rgba(102, 102, 102, 1);
+        font-size: $font-size-xs;
+        font-weight: $font-regular;
+        line-height: 1.125rem;
+    }
+
+    .legend-value {
+        color: rgba(0, 0, 0, 1);
+        font-size: 1.125rem;
+        font-weight: $font-regular;
+        line-height: 1.125rem;
+    }
+
+    .legend-item-in .legend-dot {
+        background: #0f4a86;
+    }
+
+    .legend-item-out .legend-dot {
+        background: #ff6a00;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+            'safety uniform'
+            'helmet warning'
+            'access warning'
+            'mask weather'
+            'tracking tracking';
+    }
+}
+
+@media (max-width: 767.98px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'safety'
+            'uniform'
+            'helmet'
+            'access'
+            'mask'
+            'warning'
+            'weather'
+            'tracking';
+    }
+}

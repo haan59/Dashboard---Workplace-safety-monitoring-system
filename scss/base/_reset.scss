@@ -1,0 +1,26 @@
+@use 'variables' as *;
+@use 'typography' as *;
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: $font-main;
+    color: $color-text;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}

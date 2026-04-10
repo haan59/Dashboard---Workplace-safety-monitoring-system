@@ -1,0 +1,148 @@
+// ============================================
+// 1. Khai báo Font Family
+// ============================================
+$font-main:
+    'Montserrat',
+    'Be Vietnam Pro',
+    system-ui,
+    -apple-system,
+    sans-serif;
+
+// ============================================
+// 2. Khai báo Font Weight
+// ============================================
+$font-light: 300;
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+// ============================================
+// 3. Khai báo Font Size (dùng rem để dễ scale)
+// ============================================
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+$font-size-2xl: 1.875rem; // 30px
+$font-size-3xl: 2.25rem; // 36px
+$font-size-4xl: 3rem; // 48px
+
+// Heading sizes
+$font-size-h1: 2rem; // 32px
+$font-size-h2: 1.75rem; // 28px
+$font-size-h3: 1.5rem; // 24px
+$font-size-h4: 1.25rem; // 20px
+$font-size-h5: 1.125rem; // 18px
+$font-size-h6: 1rem; // 16px
+
+// ============================================
+// 4. Mixin - Text Style Builder
+// ============================================
+@mixin text-style($size, $weight, $lh: 1.5) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $lh;
+}
+
+// Mixin cho Heading
+@mixin heading-style($size, $weight: $font-bold, $lh: 1.2) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $lh;
+    margin: 0;
+}
+
+// Mixin cho Body text
+@mixin body-text($size: $font-size-base, $weight: $font-regular, $lh: 1.6) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $lh;
+}
+
+// ============================================
+// 5. Utility Classes (optional)
+// ============================================
+.text-h1 {
+    @include heading-style($font-size-h1);
+}
+
+.text-h2 {
+    @include heading-style($font-size-h2);
+}
+
+.text-h3 {
+    @include heading-style($font-size-h3);
+}
+
+.text-h4 {
+    @include heading-style($font-size-h4);
+}
+
+.text-h5 {
+    @include heading-style($font-size-h5);
+}
+
+.text-h6 {
+    @include heading-style($font-size-h6);
+}
+
+.text-body {
+    @include body-text();
+}
+
+.text-body-sm {
+    @include body-text($font-size-sm);
+}
+
+.text-body-lg {
+    @include body-text($font-size-lg);
+}
+
+.text-light {
+    font-weight: $font-light;
+}
+
+.text-regular {
+    font-weight: $font-regular;
+}
+
+.text-semibold {
+    font-weight: $font-semibold;
+}
+
+.text-bold {
+    font-weight: $font-bold;
+}
+
+// ============================================
+// 6. Web Font Definitions
+// ============================================
+/* Montserrat Font - loaded from Google Fonts */
+/* SVN Nexa Font Family (deprecated - using Montserrat instead) */
+/*
+@font-face {
+    font-family: 'SVN Nexa';
+    src: url('../webfonts/SVN-Nexa Light.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SVN Nexa';
+    src: url('../webfonts/SVN-Nexa Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SVN Nexa';
+    src: url('../webfonts/SVN-Nexa Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+*/

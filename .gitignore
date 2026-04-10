@@ -1,0 +1,6 @@
+node_modules/
+dist/css/*.map
+dist/css/style.css
+scss/main.css
+scss/main.css.map
+assets/css/style.css.map

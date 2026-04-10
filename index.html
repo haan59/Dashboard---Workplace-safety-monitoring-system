@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hệ thống giám sát an toàn lao động</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="vendor/overlayscrollbars/overlayscrollbars.min.css" />
+        <link rel="stylesheet" href="assets/css/style.css" />
+    </head>
+    <body>
+        <div class="dashboard-app d-flex">
+            <aside class="sidebar" id="sidebar"></aside>
+
+            <main class="main-content flex-grow-1">
+                <header class="topbar d-flex justify-content-between align-items-center"></header>
+
+                <section class="content-grid mt-3">
+                    <div class="dashboard-grid">
+                        <article class="dash-card stat-card safety-score-card grid-safety">
+                            <div class="score-head">
+                                <h3 class="card-title">Điểm số an toàn</h3>
+                            </div>
+                            <div class="score-body">
+                                <div class="chart-wrap chart-wrap-sm">
+                                    <canvas id="safetyGauge"></canvas>
+                                    <div class="gauge-value" id="safetyGaugeValue">3.5</div>
+                                </div>
+                                <div class="score-state">
+                                    <span>Trạng thái</span>
+                                    <strong>An toàn</strong>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0 info-line">
+                                <iconify-icon icon="mdi:information-outline"></iconify-icon>
+                                Dựa trên tỉ lệ chấp hành các yêu cầu an toàn
+                            </p>
+                        </article>
+
+                        <article class="dash-card stat-card grid-uniform">
+                            <h3 class="card-title">Quần áo bảo hộ</h3>
+                            <div class="d-flex align-items-center justify-content-between gap-3 mt-4">
+                                <div>
+                                    <p class="display-number mt-4 text-success">149</p>
+                                    <p class="text-muted mt-3 ms-2 display-number-total">160</p>
+                                </div>
+                                <div class="mini-chart">
+                                    <canvas id="uniformDonut"></canvas>
+                                    <div class="donut-text" id="uniformDonutText">93%</div>
+                                </div>
+                            </div>
+                            <p class="status-text mt-4 mb-0">
+                                Tình trạng:
+                                <span class="text-success">Tốt</span>
+                            </p>
+                        </article>
+
+                        <article class="dash-card stat-card grid-helmet">
+                            <h3 class="card-title">Mũ bảo hộ</h3>
+                            <div class="d-flex align-items-center justify-content-between gap-3 mt-4">
+                                <div>
+                                    <p class="display-number mt-4 text-warning">96</p>
+                                    <p class="text-muted mt-3 ms-2 display-number-total">160</p>
+                                </div>
+                                <div class="mini-chart">
+                                    <canvas id="helmetDonut"></canvas>
+                                    <div class="donut-text" id="helmetDonutText">63%</div>
+                                </div>
+                            </div>
+                            <p class="status-text mt-4 mb-0">
+                                Tình trạng:
+                                <span class="text-warning">Chưa tốt</span>
+                            </p>
+                        </article>
+
+                        <article class="dash-card access-card grid-access">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3 class="card-title mb-0">Đo đếm ra vào</h3>
+                                <select class="form-select form-select-sm w-auto">
+                                    <option>Tất cả khu vực</option>
+                                </select>
+                            </div>
+                            <div class="access-chart-scroll">
+                                <div class="access-chart-track">
+                                    <div class="chart-wrap">
+                                        <canvas id="accessBarChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="access-legend">
+                                <div class="legend-item legend-item-in">
+                                    <span class="legend-meta">
+                                        <span class="legend-dot"></span>
+                                        <span class="legend-label me-4">Vào</span>
+                                    </span>
+                                    <span class="legend-value">443</span>
+                                </div>
+                                <div class="legend-item legend-item-out">
+                                    <span class="legend-meta">
+                                        <span class="legend-dot"></span>
+                                        <span class="legend-label me-4">Ra</span>
+                                    </span>
+                                    <span class="legend-value">234</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="dash-card grid-mask">
+                            <h3 class="card-title">Khẩu trang</h3>
+                            <div class="d-flex align-items-center justify-content-between mt-4 gap-3">
+                                <div>
+                                    <p class="display-number mt-4 text-purple">38</p>
+                                    <p class="text-muted display-number-total mt-3 ms-2">160</p>
+                                </div>
+                                <div class="mini-chart">
+                                    <canvas id="maskDonut"></canvas>
+                                    <div class="donut-text" id="maskDonutText">25%</div>
+                                </div>
+                            </div>
+                            <div class="placeholder-note mt-4">Tỉ lệ mang khẩu trang còn thấp, cần nâng cao để bảo vệ sức khỏe.</div>
+                        </article>
+
+                        <article class="dash-card grid-tracking">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3 class="card-title mb-0">Theo dõi theo khu vực</h3>
+                                <select class="form-select form-select-sm w-auto">
+                                    <option>Tất cả khu vực</option>
+                                </select>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="camera-card">
+                                        <img src="./assets/img/temp/khuvuccongtruong.jpg" alt="Khu vực công trường" />
+                                        <span class="live-pill">
+                                            <iconify-icon icon="mdi:circle"></iconify-icon>
+                                            Live
+                                        </span>
+                                        <div class="camera-meta">
+                                            <p class="m-0 fw-regular">Khu vực công trường</p>
+                                            <small class="font-regular">Cam-01</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="camera-card">
+                                        <img src="./assets/img/temp/congvaochinh.jpg" alt="Cổng vào chính" />
+                                        <span class="live-pill">
+                                            <iconify-icon icon="mdi:circle"></iconify-icon>
+                                            Live
+                                        </span>
+                                        <div class="camera-meta">
+                                            <p class="m-0 fw-regular">Cổng vào chính</p>
+                                            <small class="font-regular">Cam-01</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="camera-card offline">
+                                        <div class="offline-placeholder">
+                                            <iconify-icon icon="pepicons-pencil:camera-off"></iconify-icon>
+                                        </div>
+                                        <div class="camera-meta">
+                                            <p class="m-0 fw-regular">Kho nguyên vật liệu</p>
+                                            <small class="font-regular">Cam-01 - Offline</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="dash-card warning-card p-0 overflow-hidden grid-warning" id="warningPanel">
+                            <div class="warning-head d-flex justify-content-between align-items-center">
+                                <h3 class="card-title d-flex gap-2">
+                                    <iconify-icon icon="mdi:alert-outline"></iconify-icon>
+                                    Cảnh báo
+                                </h3>
+                                <a href="#" class="small text-muted text-decoration-none">Xem tất cả</a>
+                            </div>
+                            <div class="warning-list p-3" id="warningList">
+                                <div class="warning-item">
+                                    <div class="warning-thumb warning-thumb-toptrend">
+                                        <img src="./assets/img/xamnhapvung.jpg" alt="Warning" />
+                                        <img class="toptrend-badge" src="assets/img/TopTrend.svg" alt="Top trend" />
+                                    </div>
+                                    <div>
+                                        <small>08:43</small>
+                                        <p class="mb-1">Xâm nhập vùng nguy hiểm</p>
+                                        <span class="warning-place">
+                                            <img class="warning-place-icon" src="assets/img/CameraCircle.svg" alt="Camera" />
+                                            Cam-01
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <img src="./assets/img/khongdungquanao.png" alt="Warning" />
+                                    <div>
+                                        <small>08:43</small>
+                                        <p class="mb-1">Không dùng quần áo bảo hộ</p>
+                                        <span class="warning-place">
+                                            <img class="warning-place-icon" src="assets/img/CameraCircle.svg" alt="Camera" />
+                                            Cam-01
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=400&q=60" alt="Warning" />
+                                    <div>
+                                        <small>08:43</small>
+                                        <p class="mb-1">Không mang mũ bảo hộ</p>
+                                        <span class="warning-place">
+                                            <img class="warning-place-icon" src="assets/img/CameraCircle.svg" alt="Camera" />
+                                            Cam-01
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <img src="" alt="Warning" />
+                                    <div>
+                                        <small></small>
+                                        <p class="mb-1"></p>
+                                        <span class="warning-place">
+                                            <img class="warning-place-icon" src="assets/img/CameraCircle.svg" alt="Camera" />
+                                            <!-- Cam-01 -->
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="warning-foot">
+                                <div class="warning-foot-left">
+                                    <div class="warning-foot-badge" aria-hidden="true">
+                                        <canvas id="warningHotDonut"></canvas>
+                                    </div>
+                                    <strong>12</strong>
+                                    <p>Cảnh báo nóng</p>
+                                </div>
+                                <span class="warning-foot-divider" aria-hidden="true"></span>
+                                <div class="warning-foot-right">
+                                    <p>Tổng số</p>
+                                    <strong>96</strong>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="dash-card weather-card grid-weather">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">Thời tiết</h3>
+                                <span class="text-muted fw-semibold">Hà Nội</span>
+                            </div>
+                            <div class="weather-main mt-3">
+                                <div class="weather-info">
+                                    <p class="weather-temp">
+                                        32
+                                        <span>oC</span>
+                                    </p>
+                                </div>
+                                <img class="weather-icon" src="assets/img/weather.svg" alt="Weather" />
+                            </div>
+                            <div class="text-muted mb-0 weather-description">Nhiều mây, oi bức</div>
+                            <div class="row g-2 mt-3 weather-stats small py-2 border-top">
+                                <div class="col-4">
+                                    <div class="weather-stat-head">
+                                        <iconify-icon icon="carbon:rain-drop" width="16" height="16"></iconify-icon>
+                                        <span>Độ ẩm</span>
+                                    </div>
+                                    <p class="text-black weather-stat-value">82%</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="weather-stat-head">
+                                        <iconify-icon icon="humbleicons:wind" width="16" height="16"></iconify-icon>
+                                        <span>Gió</span>
+                                    </div>
+                                    <p class="text-black weather-stat-value">12 km/h</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="weather-stat-head">
+                                        <iconify-icon icon="mi:rain" width="16" height="16"></iconify-icon>
+                                        <span>Mưa</span>
+                                    </div>
+                                    <p class="text-black weather-stat-value">30%</p>
+                                </div>
+                            </div>
+                            <div class="placeholder-note mt-2">Thời tiết nắng cần đảm bảo sức khỏe</div>
+                        </article>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <script src="vendor/iconify/iconify-icon.min.js"></script>
+        <script src="vendor/chartjs/chart.umd.js"></script>
+        <script src="vendor/overlayscrollbars/overlayscrollbars.browser.es6.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script type="module" src="assets/js/main.js"></script>
+    </body>
+</html>
